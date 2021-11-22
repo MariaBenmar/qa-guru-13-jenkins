@@ -1,4 +1,4 @@
-package guru.ga.hw2;
+package guru.qa.hw2;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
