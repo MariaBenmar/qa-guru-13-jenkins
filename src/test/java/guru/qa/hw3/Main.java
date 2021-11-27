@@ -5,7 +5,7 @@ public class Main {
         Dacha dacha = new Dacha();
         dacha.price = 100;
         dacha.address = "derevnya Gorka, 10";
-        dacha.setAddress();
+        dacha.printAddress();
         System.out.println("When season is high the price is " + Dacha.figuredPrice("high", dacha.price) +
                 ". For other time the price is " + Dacha.figuredPrice("low", dacha.price));
     }

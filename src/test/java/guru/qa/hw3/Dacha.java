@@ -10,7 +10,7 @@ public class Dacha {
         return priceRent;
     }
 
-    public void setAddress() {
+    public void printAddress() {
         System.out.println("There is address of the Dacha: " + address);
     }
 
