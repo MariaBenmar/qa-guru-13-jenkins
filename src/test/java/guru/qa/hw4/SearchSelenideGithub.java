@@ -18,7 +18,15 @@ public class SearchSelenideGithub {
     }
 
     @Test
-        // Откройте страницу Selenide в Github
+    void SearchSelenideGithub() {
+        shouldFindSelenideRepoInGithub();
+        openWikiPages();
+        shoulFindSoftAssertion();
+        softAssertionClickAndFindJunit5Code();
+
+    }
+
+    // Откройте страницу Selenide в Github
     void shouldFindSelenideRepoInGithub() {
         open("https://github.com");
         $("[name=q]").setValue("selenide").pressEnter();
@@ -37,15 +45,14 @@ public class SearchSelenideGithub {
 
     // Убедитесь, что в списке страниц (Pages) есть страница SoftAssertions
     void shoulFindSoftAssertion() {
-        $(".wiki-body").shouldHave(text("Soft assertion")).shouldBe(visible);
-
+        $("#wiki-body").shouldHave(text("Soft assertions")).shouldBe(visible);
 
     }
 
     // Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
     void softAssertionClickAndFindJunit5Code() {
-        $(".mark-down").shouldHave(text("Soft assertion")).click();
-        $(".mark-down").shouldHave(text("Junit5")).shouldBe(visible);
+        $("#wiki-body").$(byText("Soft assertions")).click();
+        $(".markdown-body").shouldHave(text("Using JUnit5 extend test class:")).shouldBe(visible);
 
     }
 
