@@ -1,7 +1,8 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.conditions.Value;
 
 import java.io.File;
 
@@ -24,13 +25,23 @@ public class RegistrationPage {
             genderRadio = $("#genterWrapper"),
             phoneInput = $("#userNumber"),
             birthInput = $("#dateOfBirthInput"),
+            monthInput = $(".react-datepicker__month-select"),
+            yearInput = $(".react-datepicker__year-select"),
             hobbiesCheckbox = $("#hobbiesWrapper"),
             subjectsInput = $("#subjectsInput"),
-            pictureUpload = $("#uploadPicture"),
-            addressInput = $("#currentAddress"),
-            stateCitySelect = $("#stateCity-wrapper");
 
-    //methods
+    pictureUpload = $("#uploadPicture"),
+            addressInput = $("#currentAddress"),
+            stateCitySelect = $("#stateCity-wrapper"),
+
+    submitButton = $("#submit"),
+            modalTitle = $("#example-modal-sizes-title-lg");
+
+    private final ElementsCollection
+            dayInput = $$(".react-datepicker__day");
+
+
+    //methods of Registration page
     public RegistrationPage openPage() {
         open(LINK);
         welcomeFormTitle.shouldHave(text(FORM_TITLE));
@@ -66,9 +77,9 @@ public class RegistrationPage {
 
     public RegistrationPage birthInput(String day, String month, String year) {
         birthInput.click();
-        $(".react-datepicker__month-select").selectOption(month);
-        $(".react-datepicker__year-select").selectOption(year);
-        $$(".react-datepicker__day").find(text(day)).click();
+        monthInput.selectOption(month);
+        yearInput.selectOption(year);
+        dayInput.find(text(day)).click();
         return this;
     }
 
@@ -83,9 +94,9 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage pictureUpload() {
+    public RegistrationPage pictureUpload(String value) {
         pictureUpload.scrollIntoView(true);
-        pictureUpload.uploadFile(new File("src/test/resources/photo_girls.jpg"));
+        pictureUpload.uploadFile(new File(String.valueOf(value)));
         return this;
     }
 
@@ -99,6 +110,17 @@ public class RegistrationPage {
         stateCitySelect.$(byText(value1)).click();
         $("#city").click();
         stateCitySelect.$(byText(value2)).scrollTo().click();
+        return this;
+    }
+
+    public RegistrationPage submitClick() {
+        submitButton.click();
+        return this;
+    }
+
+    //methods of Modal window
+    public RegistrationPage modalCheck(String value) {
+        modalTitle.shouldHave(Condition.text(value));
         return this;
     }
 

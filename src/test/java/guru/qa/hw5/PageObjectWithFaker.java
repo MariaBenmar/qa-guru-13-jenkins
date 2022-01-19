@@ -1,12 +1,15 @@
 package guru.qa.hw5;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class PageObjectWithFaker extends TestBase {
+
     Faker faker = new Faker();
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
@@ -17,6 +20,7 @@ public class PageObjectWithFaker extends TestBase {
     //Date birth = faker.date().past(1971,12,11);
     @Test
     void fillForm() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         registrationsPage.openPage();
         registrationsPage.typeFirstName(firstName)
                 .typeLastName(lastName)
@@ -26,13 +30,14 @@ public class PageObjectWithFaker extends TestBase {
                 .birthInput("11", "December", "1971")
                 .hobbiesCheckbox("Reading", "Sports")
                 .subjectsInput("En")
-                .pictureUpload()
+                .pictureUpload("src/test/resources/photo_girls.jpg")
                 .typeAddress(address)
-                .stateCitySelect("Haryana", "Panipat");
+                .stateCitySelect("Haryana", "Panipat")
+                .submitClick()
+                .modalCheck("Thanks for submitting the form");
 
-        $("#submit").click();
+        // $("#submit").click();
 
-        $("#example-modal-sizes-title-lg").shouldHave(Condition.text("Thanks for submitting the form"));
 
     }
 }
