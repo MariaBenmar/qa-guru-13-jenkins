@@ -29,13 +29,13 @@ public class RegistrationPage {
             yearInput = $(".react-datepicker__year-select"),
             hobbiesCheckbox = $("#hobbiesWrapper"),
             subjectsInput = $("#subjectsInput"),
-
-    pictureUpload = $("#uploadPicture"),
+            pictureUpload = $("#uploadPicture"),
             addressInput = $("#currentAddress"),
             stateCitySelect = $("#stateCity-wrapper"),
+            submitButton = $("#submit"),
+            modalTitle = $("#example-modal-sizes-title-lg"),
+            resultsTable = $(".table-responsive");
 
-    submitButton = $("#submit"),
-            modalTitle = $("#example-modal-sizes-title-lg");
 
     private final ElementsCollection
             dayInput = $$(".react-datepicker__day");
@@ -83,9 +83,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage hobbiesCheckbox(String hobby1, String hobby2) {
-        hobbiesCheckbox.findElement(byText(hobby1)).click();
-        hobbiesCheckbox.findElement(byText(hobby2)).click();
+    public RegistrationPage hobbiesCheckbox(String hobby1) {
+        hobbiesCheckbox.$(byText(hobby1)).click();
         return this;
     }
 
@@ -119,8 +118,15 @@ public class RegistrationPage {
     }
 
     //methods of Modal window
-    public RegistrationPage modalCheck(String value) {
+
+
+    public RegistrationPage checkModalTitle(String value) {
         modalTitle.shouldHave(Condition.text(value));
+        return this;
+    }
+
+    public RegistrationPage checkResultsValue(String key, String value) {
+        resultsTable.$(byText(key)).parent().shouldHave(text(value));
         return this;
     }
 

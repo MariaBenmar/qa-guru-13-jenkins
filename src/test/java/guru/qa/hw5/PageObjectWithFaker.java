@@ -1,21 +1,37 @@
 package guru.qa.hw5;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import com.github.javafaker.Faker;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Selenide.$;
 
 public class PageObjectWithFaker extends TestBase {
 
-    Faker faker = new Faker();
-    String firstName = faker.name().firstName();
-    String lastName = faker.name().lastName();
-    String address = faker.address().streetAddress();
-    String email = faker.internet().emailAddress();
-    String phone = faker.phoneNumber().cellPhone();
+    static String[]
+            genderArray = {"Male", "Female", "Other"},
+            monthArray = {"January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"},
+            hobbiesArray = {"Sports", "Reading", "Music"};
+
+    static Faker faker = new Faker();
+
+    public static String
+            firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            gender = genderArray[faker.number().numberBetween(0, 2)],
+            address = faker.address().streetAddress(),
+            email = faker.internet().emailAddress(),
+            phone = faker.numerify("##########"),
+            day = String.valueOf(faker.number().numberBetween(10, 29)),
+            month = monthArray[faker.number().numberBetween(0, 2)],
+            year = String.valueOf(faker.number().numberBetween(1900, 2100)),
+            hobby = hobbiesArray[faker.number().numberBetween(0, 2)],
+            picturePath = "src/test/resources/photo_girls.jpg",
+            nameFile = picturePath.split("/")[picturePath.split("/").length - 1],
+            state = "Haryana",
+            city = "Panipat",
+            subject = "En";
+
 
     //Date birth = faker.date().past(1971,12,11);
     @Test
@@ -25,19 +41,29 @@ public class PageObjectWithFaker extends TestBase {
         registrationsPage.typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeEmail(email)
-                .chooseGender("Female")
-                .phoneinput("0123456789")
-                .birthInput("11", "December", "1971")
-                .hobbiesCheckbox("Reading", "Sports")
-                .subjectsInput("En")
-                .pictureUpload("src/test/resources/photo_girls.jpg")
+                .chooseGender(gender)
+                .phoneinput(phone)
+                .birthInput(day, month, year)
+                .hobbiesCheckbox(hobby)
+                .subjectsInput(subject)
+                .pictureUpload(picturePath)
                 .typeAddress(address)
-                .stateCitySelect("Haryana", "Panipat")
-                .submitClick()
-                .modalCheck("Thanks for submitting the form");
+                .stateCitySelect(state, city)
+                .submitClick();
 
-        // $("#submit").click();
 
+        registrationsPage.checkModalTitle("Thanks for submitting the form")
+                .checkResultsValue("Label", "Label")
+                .checkResultsValue("Student Name", firstName + " " + lastName)
+                .checkResultsValue("Student Email", email)
+                .checkResultsValue("Gender", gender)
+                .checkResultsValue("Mobile", phone)
+                .checkResultsValue("Date of Birth", day + " " + month + "," + year)
+                .checkResultsValue("Subjects", subject)
+                .checkResultsValue("Hobbies", hobby)
+                .checkResultsValue("Picture", nameFile)
+                .checkResultsValue("Address", address)
+                .checkResultsValue("State and City", state + " " + city);
 
     }
 }

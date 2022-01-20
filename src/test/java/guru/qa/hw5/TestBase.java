@@ -9,7 +9,7 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.startMaximized = true;
+        Configuration.browserSize = "1920x1080";
     }
 
 }
