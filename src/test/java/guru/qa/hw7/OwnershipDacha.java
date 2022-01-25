@@ -5,7 +5,7 @@ public class OwnershipDacha {
     String address;
     boolean availableRent;
     Ground ground;
-    public static boolean countMethod;
+    public static boolean isRent;
 
     public OwnershipDacha(int price, String address, boolean availableRent, Ground ground) {
         this.price = price;
@@ -46,7 +46,7 @@ public class OwnershipDacha {
         return ground;
     }
 
-    public static int dachaPriceForSeason(String season, int priceRent) {
+    public static int calculateddachaPriceForSeason(String season, int priceRent) {
         if (season.equals("high"))
             return priceRent * 2;
         return priceRent;
@@ -87,15 +87,15 @@ public class OwnershipDacha {
             return department;
         }
 
-        public void groundPriceCalculated() {
+        public void calculatedGroundPrice() {
 
-            if (!countMethod) {
+            if (!isRent) {
                 System.out.println("There current cost of the ground: " + getNumberOfAcres() * getPriceForAcr());
             } else {
 
                 System.out.println("There UPDATED cost of the ground: " + getNumberOfAcres() * getPriceForAcr());
             }
-            countMethod = !countMethod;
+            isRent = !isRent;
 
         }
     }

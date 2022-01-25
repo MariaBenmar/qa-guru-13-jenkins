@@ -10,11 +10,11 @@ public class MainDacha {
         System.out.println("The address of the dacha is : " + dachaGorka.getAddress());
         System.out.println("Availability for rent: " + dachaGorka.isAvailableRent());
 
-        dachaGorka.ground.groundPriceCalculated();
+        dachaGorka.ground.calculatedGroundPrice();
         dachaGorka.ground.setNumberOfAcres(15);
-        dachaGorka.ground.groundPriceCalculated();
+        dachaGorka.ground.calculatedGroundPrice();
 
-        System.out.println("When season is high the price fo RENT is " + OwnershipDacha.dachaPriceForSeason("high", dachaGorka.price) +
-                ". For other time the price for RENT is " + OwnershipDacha.dachaPriceForSeason("low", dachaGorka.price));
+        System.out.println("When season is high the price fo RENT is " + OwnershipDacha.calculateddachaPriceForSeason("high", dachaGorka.price) +
+                ". For other time the price for RENT is " + OwnershipDacha.calculateddachaPriceForSeason("low", dachaGorka.price));
     }
 }
