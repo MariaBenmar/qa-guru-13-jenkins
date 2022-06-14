@@ -37,12 +37,14 @@ compileTestJava {
 dependencies {
     // Selenide
     implementation("com.codeborne:selenide:6.0.0")
-    testImplementation("com.codeborne:selenide:5.21.0")
+    testImplementation("com.codeborne:selenide:6.5.1")
     testRuntimeOnly("org.slf4j:slf4j-simple:1.7.30")
 
     // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+
+    // Guava
+    testImplementation('com.google.guava:guava:31.1-jre')
 
     // JavaFaker
     testImplementation('com.github.javafaker:javafaker:0.12')
