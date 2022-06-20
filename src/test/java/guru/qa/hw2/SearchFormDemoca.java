@@ -55,7 +55,7 @@ public class SearchFormDemoca {
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("11 December,1971"));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("English, Maths"));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Reading"));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("photo_girls.jpg"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("files/photo_girls.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text("SPB, street, apt"));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Panipat"));
     }
