@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SearchFormDemoca {
     @BeforeAll
@@ -20,6 +20,9 @@ public class SearchFormDemoca {
     @Test
     void SearchTest() throws InterruptedException {
         open("https://demoqa.com/automation-practice-form");
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('#RightSide_Advertisement').remove()");
         $("[id=firstName]").setValue("Some firstname");
         $("[id=lastName]").setValue("Some lastname");
         $("#userEmail").setValue("aaa@aa.aa");
@@ -36,7 +39,7 @@ public class SearchFormDemoca {
 
         $("#hobbiesWrapper").$(byText("Reading")).click();
 
-        File pic = new File("src/test/resources/photo_girls.jpg");
+        File pic = new File("src/test/resources/files/photo_girls.jpg");
         $("#uploadPicture").uploadFile(pic);
 
         $("#currentAddress").setValue("SPB, street, apt");
@@ -44,8 +47,9 @@ public class SearchFormDemoca {
         $("#state").scrollTo().click();
         $("#state").$(byText("Haryana")).click();
         $("#city").click();
-        $("#city").$(byText("Panipat")).click();
-
+        $("#city").$(byText("Karnal")).click();
+        //$("#state").click();
+        $("#submit").scrollIntoView(false);
         $("#submit").click();
 
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Some firstname Some lastname"));
@@ -55,9 +59,9 @@ public class SearchFormDemoca {
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("11 December,1971"));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("English, Maths"));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Reading"));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("files/photo_girls.jpg"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("Picture photo_girls.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text("SPB, street, apt"));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Panipat"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
     }
 
 }
