@@ -1,6 +1,7 @@
 package guru.qa.hw13_11;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import static io.qameta.allure.Allure.step;
 public class SearchFormDemocaJenkins extends TestBase {
 
     @Test
+    @Tag("testdemoca")
     @DisplayName("Successful fill form")
     void SearchTest() {
 

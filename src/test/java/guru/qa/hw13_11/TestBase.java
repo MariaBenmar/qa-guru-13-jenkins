@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
+    public static CredentialsConfig credentialsConfig = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void setUp() {
@@ -27,7 +28,6 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("version", "100");
         Configuration.browser = System.getProperty("browser", "chrome");
         String remoteBrowser = System.getProperty("remote", "selenoid.autotests.cloud/wd/hub");
-        CredentialsConfig credentialsConfig = ConfigFactory.create(CredentialsConfig.class);
         Configuration.remote = "https://" + credentialsConfig.login() + ":" + credentialsConfig.password() + "@" + remoteBrowser;
 
     }
