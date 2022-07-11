@@ -24,21 +24,15 @@ repositories {
     mavenCentral()
 }
 
-/*java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-}
-*/
 compileTestJava {
     options.encoding = 'UTF-8'
 }
 
 dependencies {
     // Selenide
-    implementation("com.codeborne:selenide:6.6.3")
+    implementation("com.codeborne:selenide:6.0.0")
     testImplementation("com.codeborne:selenide:6.6.4")
-    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.36")
+    testRuntimeOnly("org.slf4j:slf4j-simple:1.7.30")
 
     // JUnit 5
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
@@ -47,13 +41,13 @@ dependencies {
     testImplementation('com.google.guava:guava:31.1-jre')
 
     // JavaFaker
-    testImplementation('com.github.javafaker:javafaker:1.0.2')
+    testImplementation('com.github.javafaker:javafaker:0.12')
 
     //Allure
-    testImplementation("io.qameta.allure:allure-selenide:2.18.1")
+    testImplementation("io.qameta.allure:allure-selenide:2.14.0")
 
     //Owner
-    testImplementation('org.aeonbits.owner:owner:1.0.12')
+    testImplementation('org.aeonbits.owner:owner:1.0.4')
 
     //Asserts
     testImplementation('org.assertj:assertj-core:3.23.1')
@@ -61,7 +55,7 @@ dependencies {
     //Files
     testImplementation(
             'com.codeborne:pdf-test:1.7.0',
-            'com.codeborne:xls-test:1.5.0',
+            'com.codeborne:xls-test:1.4.3',
             'com.opencsv:opencsv:5.6',
             'com.google.code.gson:gson:2.9.0',
             'com.fasterxml.jackson.core:jackson-core:2.13.3',
