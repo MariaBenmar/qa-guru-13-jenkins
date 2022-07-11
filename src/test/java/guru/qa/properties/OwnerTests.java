@@ -23,5 +23,4 @@ public class OwnerTests {
         String message = format("I logged in as %s with password %s", login, password);
         System.out.println("Message: " + message);
     }
-
 }
