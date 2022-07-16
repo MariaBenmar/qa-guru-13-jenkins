@@ -39,3 +39,7 @@ target/
 /gradlew.bat
 .todo
 *.properties
+
+
+# files
+telegram.json
