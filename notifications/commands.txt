@@ -3,13 +3,28 @@ curl -X POST \
      -d '{"chat_id": "-1001673011921", "text": "This is a test from curl", "disable_notification": true}' \
      https://api.telegram.org/botXXX/sendMessage
 
+
+cd ..
+FILE=./allure-notifications-4.1.jar
+if [ ! -f "$FILE" ]; then
+   wget https://github.com/qa-guru/allure-notifications/releases/download/4.1/allure-notifications-4.1.jar
+fi
+
+
+
 java \
 "-DconfigFile=notifications/telegram.json" \
 -jar allure-notifications-4.1.jar
 
+
+
 java "-DconfigFile=notifications/telegram.json" -jar allure-notifications-4.1.jar
 
+
+
 https://github.com/qa-guru/allure-notifications/wiki
+
+
 
 Example for Telegram messenger:
 
@@ -30,6 +45,8 @@ Example for Telegram messenger:
     "replyTo": ""
   }
 }
+
+
 
 
 {
