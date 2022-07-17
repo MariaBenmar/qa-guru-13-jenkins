@@ -9,6 +9,7 @@ java \
 
 java "-DconfigFile=notifications/telegram.json" -jar allure-notifications-4.1.jar
 
+https://github.com/qa-guru/allure-notifications/wiki
 
 Example for Telegram messenger:
 
