@@ -1,34 +1,29 @@
 plugins {
-    id 'java-library'
-    id "io.qameta.allure" version "2.9.6"
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'
 }
 
-allure {
-    report {
-        version.set("2.14.0")
-    }
-    adapter {
-        autoconfigure.set(true)
-        aspectjWeaver.set(true)
-        frameworks {
-            junit5 {
-                autoconfigureListeners.set(true)
-                adapterVersion.set("2.16.1")
-                enabled.set(true)
-            }
-        }
-    }
-}
+group 'qa.guru.allure'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+allure {
+    report {
+        version.set("2.18.1")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.18.1")
+            }
+        }
     }
 }
+
 
 compileTestJava {
     options.encoding = 'UTF-8'
@@ -41,7 +36,9 @@ dependencies {
     testRuntimeOnly("org.slf4j:slf4j-simple:1.7.30")
 
     // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation (
+            'org.junit.jupiter:junit-jupiter-api:5.8.2',
+            'org.junit.jupiter:junit-jupiter-params:5.8.2',)
 
     // Guava
     testImplementation('com.google.guava:guava:31.1-jre')
@@ -50,7 +47,7 @@ dependencies {
     testImplementation('com.github.javafaker:javafaker:0.12')
 
     //Allure
-    testImplementation("io.qameta.allure:allure-selenide:2.14.0")
+    testImplementation("io.qameta.allure:allure-selenide:2.18.1")
 
     //Owner
     testImplementation('org.aeonbits.owner:owner:1.0.4')
@@ -67,6 +64,8 @@ dependencies {
             'com.fasterxml.jackson.core:jackson-core:2.13.3',
             'com.fasterxml.jackson.core:jackson-databind:2.13.3'
     )
+    //Webdriver Manager
+    testImplementation('io.github.bonigarcia:webdrivermanager:5.2.1')
 
 
 }
@@ -100,7 +99,14 @@ task hello_test(type: Test) {
 }
 
 task owner_test(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags "owner"
     }
 }
+
+task erarta_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "erartaTest"
+    }
+}
+
